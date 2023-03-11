@@ -1,2 +1,5 @@
-# site-de-not-cias
-Site de notícias alimentado por API
+# site-de-notícias
+#### Site de notícias alimentado por API
+
+## API: mediastack - https://mediastack.com/
+
