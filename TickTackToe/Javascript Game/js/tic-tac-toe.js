@@ -17,21 +17,53 @@ const tic_tac_toe = {
     },
     container_element: null,
     gameOver: false,
+    winning_sequences: [
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,4,8],
+        [2,4,6],
+        ],
+    
 
     init: function(container){
         this.container_element = container;
     },
 
-    make_play(position){
+    make_play: function(position){
         if(this.gameOver) return false;
         if(this.board[position] === ""){
             this.board[position] = this.symbols.options [ this.symbols.turn_index];
-
+            this.draw();
+            let winning_check_index = this.check_winning_sequences(this.symbols.options [ this.symbols.turn_index]);
+            if(winning_check_index >= 0){
+                    console.log("ganhador")
+                } else {
+                this.symbols.change();
+                };
+                return true;
+        } else {
+            return false;
         }
+    },
 
-
+    check_winning_sequences: function(symbol){
+        for(let i in this.winning_sequences){
+            if( this.board[this.winning_sequences[i][0] === symbol] &&
+                this.board[this.winning_sequences[i][1] === symbol] &&
+                this.board[this.winning_sequences[i][2] === symbol])
+                {
+                    console.log("sequencia vencedora " + i);
+                    return i;
+                }
+        };
+        return -1;
 
     },
+
 
     draw: function(){
         let content = '';
