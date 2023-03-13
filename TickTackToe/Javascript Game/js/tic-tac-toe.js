@@ -25,7 +25,7 @@ const tic_tac_toe = {
         [1,4,7],
         [2,5,8],
         [0,4,8],
-        [2,4,6],
+        [2,4,6]
         ],
     
 
@@ -40,7 +40,8 @@ const tic_tac_toe = {
             this.draw();
             let winning_check_index = this.check_winning_sequences(this.symbols.options [ this.symbols.turn_index]);
             if(winning_check_index >= 0){
-                    console.log("ganhador")
+                    console.log("Winner");
+                    this.games_is_over();
                 } else {
                 this.symbols.change();
                 };
@@ -50,13 +51,26 @@ const tic_tac_toe = {
         }
     },
 
+    start: function(){
+        this.board.fill('');
+        this.draw();
+        this.gameOver = false;
+
+    },
+
+
+    games_is_over: function(){
+        this.gameOver = true;
+        console.log("Game Over");
+    },
+
     check_winning_sequences: function(symbol){
         for(let i in this.winning_sequences){
-            if( this.board[this.winning_sequences[i][0] === symbol] &&
-                this.board[this.winning_sequences[i][1] === symbol] &&
-                this.board[this.winning_sequences[i][2] === symbol])
+            if( this.board[this.winning_sequences[i][0]] == symbol &&
+                this.board[this.winning_sequences[i][1]] == symbol &&
+                this.board[this.winning_sequences[i][2]] == symbol)
                 {
-                    console.log("sequencia vencedora " + i);
+                    console.log("Winner sequence was: " + i);
                     return i;
                 }
         };
