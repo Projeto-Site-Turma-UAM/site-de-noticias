@@ -7,12 +7,41 @@
 */
 
 const tic_tac_toe = {
-    board: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
-    symbols: ["X", "O"],
+    board: ["", "", "", "", "", "", "", "", ""],
+    symbols: {
+        options: ["X", "O"],
+        turn_index: 0,
+        change: function(){
+            this.turn_index = (this.turn_index === 0 ? 1 : 0);
+        }    
+    },
     container_element: null,
+    gameOver: false,
 
     init: function(container){
         this.container_element = container;
+    },
+
+    make_play(position){
+        if(this.gameOver) return false;
+        if(this.board[position] === ""){
+            this.board[position] = this.symbols.options [ this.symbols.turn_index];
+
+        }
+
+
 
     },
+
+    draw: function(){
+        let content = '';
+
+        for (let i in this.board){
+            content += '<div onclick="tic_tac_toe.make_play(' + i + ')">' + this.board[i] + '</div>';
+        }
+
+        this.container_element.innerHTML = content;
+    },
+
+    
 };
